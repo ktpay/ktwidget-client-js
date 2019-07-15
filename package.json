@@ -1,0 +1,24 @@
+{
+  "name": "@nplus.tech/ktwidget-client",
+  "version": "0.0.4",
+  "description": "KTWidget api client",
+  "main": "src/widget.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ktpay/ktwidget-client-js.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": {
+    "name": "Mitrofanov Danil"
+  },
+  "keywords": [
+    "api",
+    "fintech",
+    "ktwidget",
+    "nplus.tech",
+    "widget"
+  ],
+  "license": "MIT"
+}
