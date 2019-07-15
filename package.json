@@ -1,24 +1,29 @@
 {
   "name": "@nplus.tech/ktwidget-client",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "KTWidget api client",
   "main": "src/widget.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ktpay/ktwidget-client-js.git"
   },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": {
-    "name": "Mitrofanov Danil"
-  },
   "keywords": [
-    "api",
     "fintech",
+    "api",
+    "widget",
     "ktwidget",
-    "nplus.tech",
-    "widget"
+    "nplus.tech"
   ],
-  "license": "MIT"
+  "author": "Mitrofanov Danil",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ktpay/ktwidget-client-js/issues"
+  },
+  "homepage": "https://github.com/ktpay/ktwidget-client-js#readme",
+  "dependencies": {
+    "libsodium-wrappers": "^0.7.4"
+  }
 }
