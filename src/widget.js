@@ -80,11 +80,11 @@ export class ApiClient {
             sodium.base64_variants.ORIGINAL
         );
         let cipher = sodium.crypto_box_seal(JSON.stringify(data), recipientPk);
-        let encrypted = sodium.to_base64(
+
+        return sodium.to_base64(
             cipher,
             sodium.base64_variants.ORIGINAL
         );
-        return encrypted;
     }
     createTransaction(order) {
         let iframe = this.createIframe();
