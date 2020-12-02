@@ -1,6 +1,6 @@
 {
   "name": "@nplus.tech/ktwidget-client",
-  "version": "0.0.6",
+  "version": "1.0.1",
   "description": "KTWidget api client",
   "main": "src/widget.js",
   "scripts": {
@@ -25,5 +25,10 @@
   "homepage": "https://github.com/ktpay/ktwidget-client-js#readme",
   "dependencies": {
     "libsodium-wrappers": "^0.7.8"
+  },
+  "devDependencies": {},
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   }
 }
