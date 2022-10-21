@@ -1,6 +1,6 @@
 {
   "name": "@nplus.tech/ktwidget-client",
-  "version": "1.0.2",
+  "version": "1.0.5",
   "description": "KTWidget api client",
   "main": "src/widget.js",
   "scripts": {
@@ -17,7 +17,7 @@
     "ktwidget",
     "nplus.tech"
   ],
-  "author": "Mitrofanov Danil",
+  "author": "Kovalev Konstantin|Mitrofanov Danil",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/ktpay/ktwidget-client-js/issues"

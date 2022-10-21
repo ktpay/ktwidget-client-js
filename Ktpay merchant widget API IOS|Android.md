@@ -1,18 +1,18 @@
-# Using Ktpay Merchant Widget API
+# Using KTPay Merchant Widget API
 
-Due to the impossibility of using third-party cookies, in this case the cookies of the Ktpay payment widget, there is an option to directly call the acquiring bank's payment page for payment in the iOS|Android application.
+Due to the impossibility of using third-party cookies, in this case the cookies of the KTPay payment widget, there is an option to directly call the acquiring bank's payment page for payment in the iOS|Android application.
 This scheme can be used for `Android` applications as well.
 
 To do this, the following steps are required:
 
-1. Create a payment on the Ktpay side;
-2. Get bank transaction parameters from Ktpay;
+1. Create a payment on the KTPay side;
+2. Get bank transaction parameters from KTPay;
 3. In the application itself on `iOS|Android`, call the payment page of the acquirer's bank;
 4. Receiving a PDF receipt of the transaction (optional).
 
 # Create payment
 
-Send a request to create a payment on the Ktpay side.
+Send a request to create a payment on the KTPay side.
 
 `POST https://fintech.nplus.tech/api/v1/merchant-widget/payment`
 
@@ -21,7 +21,7 @@ Send a request to create a payment on the Ktpay side.
 ```
 Auth-Identifier: app_id
 ```
-where, `app_id` is the identifier of the merchant's application in the Ktpay system.
+where, `app_id` is the identifier of the merchant's application in the KTPay system.
 
 **Body**:
 
