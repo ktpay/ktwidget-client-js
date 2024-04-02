@@ -1,4 +1,54 @@
-# Using KTPay Merchant Widget API
+# KTPay Merchant Widget API
+
+# Version change history
+
+### *v2.0*:
+* The `api/v1/merchant-widget/payment/hash/acquirer-options` method has been updated
+    and the parameters for transmission via the POST form have been eliminated.
+    The list of output parameters has been changed.
+
+    Previously there was:
+    ```json
+    {
+      "error": [],
+      "response": {
+        "success": true,
+        "data": {
+          "callback_back_url": "https://domain.com/",
+          "callback_success_url": "https://domain.com/",
+          "callback_failed_url": "https://domain.com/",
+          "signed_order": "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48ZG9jdW1lbnQ+PG1lcmNoYW50IGNlcnRfaWQ9ImMxODNlNjhjIiBuYW1lPSJOUExVUy5URUNIIj48b3JkZXIgb3JkZXJfaWQ9IjEwOTQ2OSIgYW1vdW50PSIxMDAiIGN1cnJlbmN5PSIzOTgiPjxkZXBhcnRtZW50IG1lcmNoYW50X2lkPSI5ODU0ODYzMSIgYW1vdW50PSIxMDAiIGFib25lbnRfaWQ9IjEiLz48L29yZGVyPjwvbWVyY2hhbnQ+PG1lcmNoYW50X3NpZ24gdHlwZT0iUlNBIj5haDE1ZkRQaFRNclgvUWxOV3lqazB2UERZZnFYblBsUjZSOERtSHpGNGpuNGxFd3RqSWVBZk4xM1dFWE1FSVlEUmJSc09zMlNnMDI5c1Q5Ti94ME1Va2lJbFczODJ4UDd5T0tiNVVlY1V2WHNyWHc0UFZTckEyaVVjQW14Qk50MWdFMGJ3TlcwT2FqQUZNR0s3R2FFamFmWXJXbmxxYlUrUW1GaU5TZkFxaVU9PC9tZXJjaGFudF9zaWduPjwvZG9jdW1lbnQ+",
+          "action": "https://epay.kkb.kz/jsp/process/logon.jsp",
+          "language": "rus",
+          "post_link": "https://card.nplus.tech/api/v1/merchant-widget/payment/488c9a8b24d4f3f6ec5611dd37cefc6e4fdb389s/post-link",
+          "back_link": "https://card.nplus.tech/api/v1/merchant-widget/payment/488c9a8b24d4f3f6ec5611dd37cefc6e4fdb389s/back-link",
+          "template": "ktwidget_pay_kt.xsl"
+        }
+      }
+    }
+    ```
+    
+    Became:
+    
+    ```json
+    {
+      "error": [],
+      "response": {
+        "success": true,
+        "data": {
+          "payment_page": "https://epay.homebank.kz/payform/?params=JYOwbg9sDGCmCSATAvABnR9BGAzAVlQHYA2ADgDIAjAQ2gGsAZUO5ACwBd2AHAZwFIcAQT4AmAGKix0agCdEAOhBcANgFce89rGitJ1LsElgskgLawZO6iHYBaAO7BEAc1jtJXagE9zNydAAzRFIAThxiABZqPFI8LADtLBDKEOoSWDCAhMoA0kQ8RGjCk3EaeltlZnIA6mA1GVgAIVpGZmRyLggediYQFg5ufiFJf1kFJTUNLR09AyMSsXNLVms7Rxc3D29fd3FA4LDI6Nj4xOTU9Mzs3PzCguoFzu6Kqpq61QaABS6etvJlazOVTUVzIABKAFVyIhYDxoDJgFx2MAICBkAAVGTWHi0ZGo0SoAIyCCmAkAaXRn0EAE1yLRoBBVDYkMgROQtDJTKBqMo0IRCBFQqgcLZYJRCIhbIKRJRbCERDhYLZEAFUGRYAERFroDg6aZGTZkFh0ORoB8GiBoF5kGSAFrojqsVGwdqwUy1XmmsYAZWoYBdNWUPFgdNU7FYyHpsJ4AH12BA6LAQAIACIADX5nwAomSAFLUiIACQpuYhOAiZKwWYAigB1HCiYjxxMgONeLiwVONWCyCxAA"
+        }
+      }
+    }
+    ```
+    
+    Now it is enough to open the WebView using the `payment_page` parameter to go to the payment page.
+
+### *v1.0*:
+Initial version, used to receive and transmit a list of parameters
+for the acquirer's bank via a POST form.
+
+# General information
 
 Due to the impossibility of using third-party cookies, in this case the cookies of the KTPay payment widget, there is an option to directly call the acquiring bank's payment page for payment in the iOS|Android application.
 This scheme can be used for `Android` applications as well.
@@ -51,13 +101,13 @@ BxaXC4/dHhr54eYiW7piJqJ6mWYGTDiLpdRnA5PV/zU5xRrdcA5mPC9IKCqJbX8oub4yQ7OOq3bpBVN3
 
 ```json
 {
-    "error": [],
-    "response": {
-        "success": true,
-        "data": {
-            "transaction_hash": "488c9a8b24d4f3f6ec5611dd37cefc6e4fdb389f"
-        }
+  "error": [],
+  "response": {
+    "success": true,
+    "data": {
+      "payment_page": "https://epay.homebank.kz/payform/?params=JYOwbg9sDGCmCSATAvABnR9BGAzAVlQHYA2ADgDIAjAQ2gGsAZUO5ACwBd2AHAZwFIcAQT4AmAGKix0agCdEAOhBcANgFce89rGitJ1LsElgskgLawZO6iHYBaAO7BEAc1jtJXagE9zNydAAzRFIAThxiABZqPFI8LADtLBDKEOoSWDCAhMoA0kQ8RGjCk3EaeltlZnIA6mA1GVgAIVpGZmRyLggediYQFg5ufiFJf1kFJTUNLR09AyMSsXNLVms7Rxc3D29fd3FA4LDI6Nj4xOTU9Mzs3PzCguoFzu6Kqpq61QaABS6etvJlazOVTUVzIABKAFVyIhYDxoDJgFx2MAICBkAAVGTWHi0ZGo0SoAIyCCmAkAaXRn0EAE1yLRoBBVDYkMgROQtDJTKBqMo0IRCBFQqgcLZYJRCIhbIKRJRbCERDhYLZEAFUGRYAERFroDg6aZGTZkFh0ORoB8GiBoF5kGSAFrojqsVGwdqwUy1XmmsYAZWoYBdNWUPFgdNU7FYyHpsJ4AH12BA6LAQAIACIADX5nwAomSAFLUiIACQpuYhOAiZKwWYAigB1HCiYjxxMgONeLiwVONWCyCxAA"
     }
+  }
 }
 ```
 
@@ -75,57 +125,23 @@ Where, `{transaction_hash}` - hash of the transaction received after creating th
 
 ```json
 {
-    "error": [],
-    "response": {
-        "success": true,
-        "data": {
-            "callback_back_url": "https://domain.com/",
-            "callback_success_url": "https://domain.com/",
-            "callback_failed_url": "https://domain.com/",
-            "signed_order": "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48ZG9jdW1lbnQ+PG1lcmNoYW50IGNlcnRfaWQ9ImMxODNlNjhjIiBuYW1lPSJOUExVUy5URUNIIj48b3JkZXIgb3JkZXJfaWQ9IjEwOTQ2OSIgYW1vdW50PSIxMDAiIGN1cnJlbmN5PSIzOTgiPjxkZXBhcnRtZW50IG1lcmNoYW50X2lkPSI5ODU0ODYzMSIgYW1vdW50PSIxMDAiIGFib25lbnRfaWQ9IjEiLz48L29yZGVyPjwvbWVyY2hhbnQ+PG1lcmNoYW50X3NpZ24gdHlwZT0iUlNBIj5haDE1ZkRQaFRNclgvUWxOV3lqazB2UERZZnFYblBsUjZSOERtSHpGNGpuNGxFd3RqSWVBZk4xM1dFWE1FSVlEUmJSc09zMlNnMDI5c1Q5Ti94ME1Va2lJbFczODJ4UDd5T0tiNVVlY1V2WHNyWHc0UFZTckEyaVVjQW14Qk50MWdFMGJ3TlcwT2FqQUZNR0s3R2FFamFmWXJXbmxxYlUrUW1GaU5TZkFxaVU9PC9tZXJjaGFudF9zaWduPjwvZG9jdW1lbnQ+",
-            "action": "https://epay.kkb.kz/jsp/process/logon.jsp",
-            "language": "rus",
-            "post_link": "https://card.nplus.tech/api/v1/merchant-widget/payment/488c9a8b24d4f3f6ec5611dd37cefc6e4fdb389s/post-link",
-            "back_link": "https://card.nplus.tech/api/v1/merchant-widget/payment/488c9a8b24d4f3f6ec5611dd37cefc6e4fdb389s/back-link",
-            "template": "ktwidget_pay_kt.xsl"
-        }
+  "error": [],
+  "response": {
+    "success": true,
+    "data": {
+      "payment_page": "https://epay.homebank.kz/payform/?params=JYOwbg9sDGCmCSATAvABnR9BGAzAVlQHYA2ADgDIAjAQ2gGsAZUO5ACwBd2AHAZwFIcAQT4AmAGKix0agCdEAOhBcANgFce89rGitJ1LsElgskgLawZO6iHYBaAO7BEAc1jtJXagE9zNydAAzRFIAThxiABZqPFI8LADtLBDKEOoSWDCAhMoA0kQ8RGjCk3EaeltlZnIA6mA1GVgAIVpGZmRyLggediYQFg5ufiFJf1kFJTUNLR09AyMSsXNLVms7Rxc3D29fd3FA4LDI6Nj4xOTU9Mzs3PzCguoFzu6Kqpq61QaABS6etvJlazOVTUVzIABKAFVyIhYDxoDJgFx2MAICBkAAVGTWHi0ZGo0SoAIyCCmAkAaXRn0EAE1yLRoBBVDYkMgROQtDJTKBqMo0IRCBFQqgcLZYJRCIhbIKRJRbCERDhYLZEAFUGRYAERFroDg6aZGTZkFh0ORoB8GiBoF5kGSAFrojqsVGwdqwUy1XmmsYAZWoYBdNWUPFgdNU7FYyHpsJ4AH12BA6LAQAIACIADX5nwAomSAFLUiIACQpuYhOAiZKwWYAigB1HCiYjxxMgONeLiwVONWCyCxAA"
     }
+  }
 }
 ```
 
 # Calling the payment page of the acquiring bank
 
-In the application `iOS|Android`, you need to call the payment page of the acquirer's bank.
-Method of calling `POST`, format` Multipart form`.
-Official [documentation](https://testpay.kkb.kz/doc/htm/fields_description.html) and [example](https://testpay.kkb.kz/jsp/client/pay.jsp).
+In the `iOS|Android` application, you need to open the payment page of the acquirer's bank.
 
-**Example of the form of payment**:
+It is enough to open the WebView using the `payment_page` parameter to go to the payment page.
 
-```html
-<form name="SendOrder" method="post" action="{action}">
-    <input type="text" name="Signed_Order_B64" size="100" value="{signed_order}">
-    <input type="text" id="em" name="email" size="50" maxlength="50" value="info@ktpay.kz">
-    <input type="text" name="Language" size="50" maxlength="3" value="{language}">
-    <input type="text" name="BackLink" size="50" maxlength="50" value="{back_link}"></td></tr>
-    <input type="text" name="PostLink" size="50" maxlength="50" value="{post_link}"></td></tr>
-    <input type="text" name="template" value="{template}">
-    <input type="submit" id="submit1" name="submit1" value="Pay" onclick="submit1.disabled=true; document.forms[0].submit();">
-</form>
-```
-Where, `{action}` - URL of the acquiring bank,
-
-`{signed_order}` - encrypted payment line,
-
-`{language}` - language of the payment page,
-
-`{back_link}` - URL of return after payment,
-
-`{post_link}` - URL for sending the payment result,
-
-`{template}` - payment page template.
-
-All parameters can be taken from [Get bank transaction parameters](#get-bank-transaction-parameters).
-You can only change the `{back_link}` parameter, the rest must be original, otherwise the payment will not be successful.
+The `payment_page` parameter can be taken from [Getting bank transaction parameters](#get-bank-transaction-parameters).
 
 # Receiving PDF transaction receipt (optional)
 
