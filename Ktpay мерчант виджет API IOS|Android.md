@@ -1,4 +1,54 @@
-# Использование KTPay Merchant Widget API
+# KTPay Merchant Widget API
+
+# История изменений версий
+
+### *v2.0*:
+* Обновлен метод `api/v1/merchant-widget/payment/hash/acquirer-options`
+    упразднены параметры для передачи через POST форму.
+    Изменен список выходных параметров.
+
+    Ранее был:
+    ```json
+    {
+      "error": [],
+      "response": {
+        "success": true,
+        "data": {
+          "callback_back_url": "https://domain.com/",
+          "callback_success_url": "https://domain.com/",
+          "callback_failed_url": "https://domain.com/",
+          "signed_order": "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48ZG9jdW1lbnQ+PG1lcmNoYW50IGNlcnRfaWQ9ImMxODNlNjhjIiBuYW1lPSJOUExVUy5URUNIIj48b3JkZXIgb3JkZXJfaWQ9IjEwOTQ2OSIgYW1vdW50PSIxMDAiIGN1cnJlbmN5PSIzOTgiPjxkZXBhcnRtZW50IG1lcmNoYW50X2lkPSI5ODU0ODYzMSIgYW1vdW50PSIxMDAiIGFib25lbnRfaWQ9IjEiLz48L29yZGVyPjwvbWVyY2hhbnQ+PG1lcmNoYW50X3NpZ24gdHlwZT0iUlNBIj5haDE1ZkRQaFRNclgvUWxOV3lqazB2UERZZnFYblBsUjZSOERtSHpGNGpuNGxFd3RqSWVBZk4xM1dFWE1FSVlEUmJSc09zMlNnMDI5c1Q5Ti94ME1Va2lJbFczODJ4UDd5T0tiNVVlY1V2WHNyWHc0UFZTckEyaVVjQW14Qk50MWdFMGJ3TlcwT2FqQUZNR0s3R2FFamFmWXJXbmxxYlUrUW1GaU5TZkFxaVU9PC9tZXJjaGFudF9zaWduPjwvZG9jdW1lbnQ+",
+          "action": "https://epay.kkb.kz/jsp/process/logon.jsp",
+          "language": "rus",
+          "post_link": "https://card.nplus.tech/api/v1/merchant-widget/payment/488c9a8b24d4f3f6ec5611dd37cefc6e4fdb389s/post-link",
+          "back_link": "https://card.nplus.tech/api/v1/merchant-widget/payment/488c9a8b24d4f3f6ec5611dd37cefc6e4fdb389s/back-link",
+          "template": "ktwidget_pay_kt.xsl"
+        }
+      }
+    }
+    ```
+    
+    Стал:
+    
+    ```json
+    {
+      "error": [],
+      "response": {
+        "success": true,
+        "data": {
+          "payment_page": "https://epay.homebank.kz/payform/?params=JYOwbg9sDGCmCSATAvABnR9BGAzAVlQHYA2ADgDIAjAQ2gGsAZUO5ACwBd2AHAZwFIcAQT4AmAGKix0agCdEAOhBcANgFce89rGitJ1LsElgskgLawZO6iHYBaAO7BEAc1jtJXagE9zNydAAzRFIAThxiABZqPFI8LADtLBDKEOoSWDCAhMoA0kQ8RGjCk3EaeltlZnIA6mA1GVgAIVpGZmRyLggediYQFg5ufiFJf1kFJTUNLR09AyMSsXNLVms7Rxc3D29fd3FA4LDI6Nj4xOTU9Mzs3PzCguoFzu6Kqpq61QaABS6etvJlazOVTUVzIABKAFVyIhYDxoDJgFx2MAICBkAAVGTWHi0ZGo0SoAIyCCmAkAaXRn0EAE1yLRoBBVDYkMgROQtDJTKBqMo0IRCBFQqgcLZYJRCIhbIKRJRbCERDhYLZEAFUGRYAERFroDg6aZGTZkFh0ORoB8GiBoF5kGSAFrojqsVGwdqwUy1XmmsYAZWoYBdNWUPFgdNU7FYyHpsJ4AH12BA6LAQAIACIADX5nwAomSAFLUiIACQpuYhOAiZKwWYAigB1HCiYjxxMgONeLiwVONWCyCxAA"
+        }
+      }
+    }
+    ```
+    
+    Теперь достаточно открыть WebView используя параметр `payment_page` для перехода на платежную страницу.
+
+### *v1.0*:
+* Изначальная версия, используется получение и передача списка параметров
+для банка эквайера посредством POST формы.
+
+# Общая информация
 
 Из-за невозможности использования `cookies` третей стороны, в данном случае `cookies` платежного виджета KTPay, есть вариант прямого вызова платежной страницы банка эквайера для оплаты в `iOS|Android` приложении.
 Такую схему можно использовать так и для `Android` приложения.
@@ -51,13 +101,13 @@ BxaXC4/dHhr54eYiW7piJqJ6mWYGTDiLpdRnA5PV/zU5xRrdcA5mPC9IKCqJbX8oub4yQ7OOq3bpBVN3
 
 ```json
 {
-    "error": [],
-    "response": {
-        "success": true,
-        "data": {
-            "transaction_hash": "488c9a8b24d4f3f6ec5611dd37cefc6e4fdb389f"
-        }
+  "error": [],
+  "response": {
+    "success": true,
+    "data": {
+      "transaction_hash": "488c9a8b24d4f3f6ec5611dd37cefc6e4fdb389f"
     }
+  }
 }
 ```
 
@@ -75,57 +125,23 @@ BxaXC4/dHhr54eYiW7piJqJ6mWYGTDiLpdRnA5PV/zU5xRrdcA5mPC9IKCqJbX8oub4yQ7OOq3bpBVN3
 
 ```json
 {
-    "error": [],
-    "response": {
-        "success": true,
-        "data": {
-            "callback_back_url": "https://domain.com/",
-            "callback_success_url": "https://domain.com/",
-            "callback_failed_url": "https://domain.com/",
-            "signed_order": "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48ZG9jdW1lbnQ+PG1lcmNoYW50IGNlcnRfaWQ9ImMxODNlNjhjIiBuYW1lPSJOUExVUy5URUNIIj48b3JkZXIgb3JkZXJfaWQ9IjEwOTQ2OSIgYW1vdW50PSIxMDAiIGN1cnJlbmN5PSIzOTgiPjxkZXBhcnRtZW50IG1lcmNoYW50X2lkPSI5ODU0ODYzMSIgYW1vdW50PSIxMDAiIGFib25lbnRfaWQ9IjEiLz48L29yZGVyPjwvbWVyY2hhbnQ+PG1lcmNoYW50X3NpZ24gdHlwZT0iUlNBIj5haDE1ZkRQaFRNclgvUWxOV3lqazB2UERZZnFYblBsUjZSOERtSHpGNGpuNGxFd3RqSWVBZk4xM1dFWE1FSVlEUmJSc09zMlNnMDI5c1Q5Ti94ME1Va2lJbFczODJ4UDd5T0tiNVVlY1V2WHNyWHc0UFZTckEyaVVjQW14Qk50MWdFMGJ3TlcwT2FqQUZNR0s3R2FFamFmWXJXbmxxYlUrUW1GaU5TZkFxaVU9PC9tZXJjaGFudF9zaWduPjwvZG9jdW1lbnQ+",
-            "action": "https://epay.kkb.kz/jsp/process/logon.jsp",
-            "language": "rus",
-            "post_link": "https://card.nplus.tech/api/v1/merchant-widget/payment/488c9a8b24d4f3f6ec5611dd37cefc6e4fdb389s/post-link",
-            "back_link": "https://card.nplus.tech/api/v1/merchant-widget/payment/488c9a8b24d4f3f6ec5611dd37cefc6e4fdb389s/back-link",
-            "template": "ktwidget_pay_kt.xsl"
-        }
+  "error": [],
+  "response": {
+    "success": true,
+    "data": {
+      "payment_page": "https://epay.homebank.kz/payform/?params=JYOwbg9sDGCmCSATAvABnR9BGAzAVlQHYA2ADgDIAjAQ2gGsAZUO5ACwBd2AHAZwFIcAQT4AmAGKix0agCdEAOhBcANgFce89rGitJ1LsElgskgLawZO6iHYBaAO7BEAc1jtJXagE9zNydAAzRFIAThxiABZqPFI8LADtLBDKEOoSWDCAhMoA0kQ8RGjCk3EaeltlZnIA6mA1GVgAIVpGZmRyLggediYQFg5ufiFJf1kFJTUNLR09AyMSsXNLVms7Rxc3D29fd3FA4LDI6Nj4xOTU9Mzs3PzCguoFzu6Kqpq61QaABS6etvJlazOVTUVzIABKAFVyIhYDxoDJgFx2MAICBkAAVGTWHi0ZGo0SoAIyCCmAkAaXRn0EAE1yLRoBBVDYkMgROQtDJTKBqMo0IRCBFQqgcLZYJRCIhbIKRJRbCERDhYLZEAFUGRYAERFroDg6aZGTZkFh0ORoB8GiBoF5kGSAFrojqsVGwdqwUy1XmmsYAZWoYBdNWUPFgdNU7FYyHpsJ4AH12BA6LAQAIACIADX5nwAomSAFLUiIACQpuYhOAiZKwWYAigB1HCiYjxxMgONeLiwVONWCyCxAA"
     }
+  }
 }
 ```
 
 # Вызов страницы оплаты банка эквайера
 
 В приложение `iOS|Android`, необходимо вызвать платежную страницу оплаты банка эквайера.
-Метод вызова `POST`, формат `Multipart form`.
-Официальная [документация](https://testpay.kkb.kz/doc/htm/fields_description.html) и [пример](https://testpay.kkb.kz/jsp/client/pay.jsp).
 
-**Пример формы оплаты**:
+Достаточно открыть WebView используя параметр `payment_page` для перехода на платежную страницу.
 
-```html
-<form name="SendOrder" method="post" action="{action}">
-    <input type="text" name="Signed_Order_B64" size="100" value="{signed_order}">
-    <input type="text" id="em" name="email" size="50" maxlength="50" value="info@ktpay.kz">
-    <input type="text" name="Language" size="50" maxlength="3" value="{language}">
-    <input type="text" name="BackLink" size="50" maxlength="50" value="{back_link}"></td></tr>
-    <input type="text" name="PostLink" size="50" maxlength="50" value="{post_link}"></td></tr>
-    <input type="text" name="template" value="{template}">
-    <input type="submit" id="submit1" name="submit1" value="Pay" onclick="submit1.disabled=true; document.forms[0].submit();">
-</form>
-```
-Где, `{action}` - URL банка эквайера,
-
-`{signed_order}` - шифрованная строка платежа,
-
-`{language}` - язык страницы оплаты,
-
-`{back_link}` - URL возврата после проведения оплаты,
-
-`{post_link}`- URL отправки результата платежа,
-
-`{template}` - шаблон страницы оплаты.
-
-Все параметры можно взять из [Получение банковских параметров транзакции](#get-bank-transaction-parameters).
-Изменять можно только параметр `{back_link}`, остальные должны быть исходными, иначе платеж не пройдет успешно.
+Параметр `payment_page` можно взять из [Получение банковских параметров транзакции](#get-bank-transaction-parameters).
 
 # Получение PDF чека транзакции (опционально)
 Когда необходимо получить PDF чек транзакции, можно воспользоваться следующий методов.
