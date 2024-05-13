@@ -2,6 +2,38 @@
 
 # Version change history
 
+### *v2.1*:
+* Updated the `api/v1/merchant-widget/payment` method
+    Added the return parameter `show_close_button` (in case of successful payment creation) -
+    a flag for displaying the widget close button.
+
+    Previously, the answer was:
+    ```json
+    {
+      "error": [],
+      "response": {
+          "success": true,
+          "data": {
+            "transaction_hash": "488c9a8b24d4f3f6ec5611dd37cefc6e4fdb389f"
+          }
+      }
+    }
+    ```
+
+  Now the answer is:
+    ```json
+    {
+      "error": [],
+      "response": {
+          "success": true,
+          "data": {
+            "transaction_hash": "488c9a8b24d4f3f6ec5611dd37cefc6e4fdb389f",
+            "show_close_button": true
+          }
+      }
+    }
+    ```
+
 ### *v2.0*:
 * The `api/v1/merchant-widget/payment/hash/acquirer-options` method has been updated
     and the parameters for transmission via the POST form have been eliminated.
@@ -105,7 +137,8 @@ BxaXC4/dHhr54eYiW7piJqJ6mWYGTDiLpdRnA5PV/zU5xRrdcA5mPC9IKCqJbX8oub4yQ7OOq3bpBVN3
   "response": {
     "success": true,
     "data": {
-      "payment_page": "https://epay.homebank.kz/payform/?params=JYOwbg9sDGCmCSATAvABnR9BGAzAVlQHYA2ADgDIAjAQ2gGsAZUO5ACwBd2AHAZwFIcAQT4AmAGKix0agCdEAOhBcANgFce89rGitJ1LsElgskgLawZO6iHYBaAO7BEAc1jtJXagE9zNydAAzRFIAThxiABZqPFI8LADtLBDKEOoSWDCAhMoA0kQ8RGjCk3EaeltlZnIA6mA1GVgAIVpGZmRyLggediYQFg5ufiFJf1kFJTUNLR09AyMSsXNLVms7Rxc3D29fd3FA4LDI6Nj4xOTU9Mzs3PzCguoFzu6Kqpq61QaABS6etvJlazOVTUVzIABKAFVyIhYDxoDJgFx2MAICBkAAVGTWHi0ZGo0SoAIyCCmAkAaXRn0EAE1yLRoBBVDYkMgROQtDJTKBqMo0IRCBFQqgcLZYJRCIhbIKRJRbCERDhYLZEAFUGRYAERFroDg6aZGTZkFh0ORoB8GiBoF5kGSAFrojqsVGwdqwUy1XmmsYAZWoYBdNWUPFgdNU7FYyHpsJ4AH12BA6LAQAIACIADX5nwAomSAFLUiIACQpuYhOAiZKwWYAigB1HCiYjxxMgONeLiwVONWCyCxAA"
+      "transaction_hash": "488c9a8b24d4f3f6ec5611dd37cefc6e4fdb389f",
+      "show_close_button": true
     }
   }
 }

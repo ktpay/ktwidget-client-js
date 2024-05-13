@@ -2,6 +2,38 @@
 
 # История изменений версий
 
+### *v2.1*:
+* Обновлены метод `api/v1/merchant-widget/payment`
+    Добавлен возвращаемый параметр `show_close_button` (в случае успешного создания платежа) -
+    флаг для отображения кнопки закрытия виджета.
+    
+    Ранее ответ был:
+    ```json
+    {
+      "error": [],
+      "response": {
+          "success": true,
+          "data": {
+            "transaction_hash": "488c9a8b24d4f3f6ec5611dd37cefc6e4fdb389f"
+          }
+      }
+    }
+    ```
+
+    Теперь ответ стал:
+    ```json
+    {
+      "error": [],
+      "response": {
+          "success": true,
+          "data": {
+            "transaction_hash": "488c9a8b24d4f3f6ec5611dd37cefc6e4fdb389f",
+            "show_close_button": true
+          }
+      }
+    }
+    ```
+
 ### *v2.0*:
 * Обновлен метод `api/v1/merchant-widget/payment/hash/acquirer-options`
     упразднены параметры для передачи через POST форму.
@@ -105,7 +137,8 @@ BxaXC4/dHhr54eYiW7piJqJ6mWYGTDiLpdRnA5PV/zU5xRrdcA5mPC9IKCqJbX8oub4yQ7OOq3bpBVN3
   "response": {
     "success": true,
     "data": {
-      "transaction_hash": "488c9a8b24d4f3f6ec5611dd37cefc6e4fdb389f"
+      "transaction_hash": "488c9a8b24d4f3f6ec5611dd37cefc6e4fdb389f",
+      "show_close_button": true
     }
   }
 }

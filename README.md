@@ -3,6 +3,10 @@ KTWidget Документация
 
 # История изменений версий
 
+### *v1.2*:
+* Добавлены новый параметр `show_close_button` - флаг указывающий необходимо ли отображать крестик закрытия
+  на странице виджета.
+
 ### *v1.1*:
 * Добавлены новые параметры `callback_force_back_url`, `callback_force_success_url`,
 `callback_force_failed_url` - необходимые для исключительного перенаправления на
@@ -175,7 +179,8 @@ KTWidget Документация
                  contract_value: "1111111"
              },
              callback_back_url: "widget.nplus.tech",
-             description: "Transaction from KTPAY"
+             description: "Transaction from KTPAY",
+             show_close_button: true,
          })
         }
     </script>
@@ -211,6 +216,9 @@ KTWidget Документация
 * `callback_back_url` (`string`, опционально): URL куда необходимо вернуть клиента после проведения транзакции;
 
 * `description` (`string`, опционально): текстовое описание транзакции.
+
+* `show_close_button` (`bool`, опционально, по умолчанию будет передано true): флаг для отображения кнопки
+   закрытия виджета, в случае значения `false` кнопка будет скрыта.
 
 ### Уведомление мерчанта о статусе транзакции
 

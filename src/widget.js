@@ -1,4 +1,5 @@
 import sodium from "libsodium-wrappers";
+
 export class ApiClient {
     constructor(sodiumKey, auth, testing) {
         this.sodiumKey = sodiumKey;
@@ -102,7 +103,8 @@ export class ApiClient {
             .then(data => {
                 iframe.src =
                     `${this.getUrl("widget")}/payment-card?hash=` +
-                    data.response.data.transaction_hash;
+                    data.response.data.transaction_hash + '&show_close_button' +
+                    data.response.data.show_close_button;
             });
     }
 }
